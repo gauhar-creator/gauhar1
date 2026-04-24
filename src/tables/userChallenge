@@ -1,0 +1,17 @@
+from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.orm import relationship
+
+
+class UserChallenge(Base):
+    __tablename__ = "user_challenges"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    user_id = Column(Integer, ForeignKey("users.id"))
+    challenge_id = Column(Integer, ForeignKey("challenges.id"))
+
+    done = Column(Integer, default=0)       
+    needs_to_do = Column(Integer)         
+    percent = Column(Integer, default=0)   
+
+    challenge = relationship("Challenge", backref="users")
